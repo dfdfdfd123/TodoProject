@@ -49,4 +49,17 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // 레트로핏
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    // 레트로핏 Gson 컨버터
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-gson
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    // xml 파일 컨버터
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-simplexml
+    implementation("com.squareup.retrofit2:converter-simplexml:2.11.0")
+    // 레트로핏 scalars 컨버터
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-scalars
+    implementation("com.squareup.retrofit2:converter-scalars:2.11.0")
 }
