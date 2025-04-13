@@ -50,6 +50,10 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    // Gson
+    // https://mvnrepository.com/artifact/com.google.code.gson/gson
+    implementation("com.google.code.gson:gson:2.12.1")
+
     // 레트로핏
     // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
