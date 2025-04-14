@@ -8,6 +8,10 @@ import android.widget.CheckBox
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.app.network.RetrofitClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
 
@@ -31,8 +35,20 @@ class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
         }
 
         private fun deleteToDo(todo: String) {
-            // 실제 DB와 연동되는 삭제 로직을 여기에 구현
+            val item = items.find { it.todo == todo } ?: return
+            RetrofitClient.apiService.deleteTodo(item.id).enqueue(object : Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    Toast.makeText(layoutTodo.context, "삭제 성공!", Toast.LENGTH_SHORT).show()
+                    items.remove(item)
+                    notifyDataSetChanged()
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    Toast.makeText(layoutTodo.context, "삭제 실패: ${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
         }
+
 
         fun setItem(item: Data) {
             checkBox.text = item.todo
