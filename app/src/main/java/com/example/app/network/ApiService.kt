@@ -14,4 +14,10 @@ interface ApiService {
 
     @DELETE("/api/todo/delete/{id}")
     fun deleteTodo(@Path("id") id: Int): Call<Void>
+
+    @PUT("/api/todo/{id}")
+    fun updateTodo(
+        @Path("id") id: Int,
+        @Body updatedTodo: Data
+    ): Call<Void>
 }

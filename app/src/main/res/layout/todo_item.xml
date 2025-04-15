@@ -16,23 +16,48 @@
     <LinearLayout
         android:id="@+id/layoutTodo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
         <CheckBox
             android:id="@+id/checkBox"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
+        <!-- 수정용 EditText 추가 -->
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:hint="할 일 수정" />
+
+
+        <!-- 수정 버튼 -->
+        <Button
+            android:id="@+id/editButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="수정"
+            android:textColor="@android:color/white"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            app:backgroundTint="@android:color/holo_blue_light" />
+
+        <!-- 삭제 버튼 -->
         <Button
             android:id="@+id/deleteButton"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="7"
             android:text="X"
+            android:textColor="@android:color/white"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
             app:backgroundTint="@android:color/holo_orange_light" />
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>
