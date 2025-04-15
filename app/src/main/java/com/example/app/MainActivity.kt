@@ -10,6 +10,10 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.example.app.databinding.ActivityMainBinding
+import com.example.app.network.RetrofitClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
@@ -49,6 +53,21 @@ class MainActivity : AppCompatActivity() {
 
     // 임시 저장 메서드 정의 (나중에 DB 기능과 연결 예정)
     private fun saveToDo() {
-        // 나중에 구현할 부분
+        val todoText = binding.inputToDo.text.toString()
+        if (todoText.isEmpty()) return
+
+        val newTodo = Data(0, todoText)
+
+        RetrofitClient.apiService.addTodo(newTodo).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                Toast.makeText(this@MainActivity, "등록 성공!", Toast.LENGTH_SHORT).show()
+                binding.inputToDo.text.clear()
+                (mainFragment as MainFragment).loadTodoList()
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Toast.makeText(this@MainActivity, "서버 연결 실패", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }
