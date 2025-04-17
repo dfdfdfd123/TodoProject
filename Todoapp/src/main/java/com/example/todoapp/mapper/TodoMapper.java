@@ -10,5 +10,6 @@ public interface TodoMapper {
     List<DataDTO> getAllTodos();
     void insertTodo(DataDTO dto);
     void deleteTodo(int id);
+    void updateTodo(DataDTO dto); // ← 이 메서드 추가
 }
 

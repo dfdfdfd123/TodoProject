@@ -38,5 +38,11 @@ public class TodoController {
     public void deleteTodo(@PathVariable int id) {
         todoService.deleteTodo(id);
     }
+
+    @PutMapping("/{id}")
+    public void updateTodo(@PathVariable int id, @RequestBody DataDTO dto) {
+        dto.setId(id); // id는 path에서 오고, 나머지는 body
+        todoService.updateTodo(dto);
+    }
 }
 

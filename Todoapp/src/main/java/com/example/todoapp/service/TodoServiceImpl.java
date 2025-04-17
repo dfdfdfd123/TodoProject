@@ -27,5 +27,10 @@ public class TodoServiceImpl implements TodoService {
     public void deleteTodo(int id) {
         todoMapper.deleteTodo(id);
     }
+
+    @Override
+    public void updateTodo(DataDTO dto) {
+        todoMapper.updateTodo(dto);
+    }
 }
 

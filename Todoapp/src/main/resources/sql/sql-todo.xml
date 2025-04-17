@@ -16,4 +16,10 @@
         DELETE FROM todos WHERE id = #{id}
     </delete>
 
+    <update id="updateTodo" parameterType="com.example.todoapp.dto.DataDTO">
+        UPDATE todos
+        SET todo = #{todo}, is_done = #{isDone}
+        WHERE id = #{id}
+    </update>
+
 </mapper>

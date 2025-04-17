@@ -8,5 +8,6 @@ public interface TodoService {
     List<DataDTO> getAllTodos();
     void insertTodo(DataDTO dto);
     void deleteTodo(int id);
+    void updateTodo(DataDTO dto); // ← 추가
 }
 
