@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(binding.root) // ✅ binding.root 사용
+        setContentView(binding.root)
 
         // Insets 설정
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // 임시 저장 메서드 정의 (나중에 DB 기능과 연결 예정)
+    // 임시 저장 메서드 정의
     private fun saveToDo() {
         val todoText = binding.inputToDo.text.toString()
         if (todoText.isEmpty()) return

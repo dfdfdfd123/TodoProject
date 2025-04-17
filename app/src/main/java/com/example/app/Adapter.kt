@@ -18,7 +18,7 @@ import retrofit2.Response
 class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
 
     private var todoId: Int = -1
-    private lateinit var currentItem: Data
+//    private lateinit var currentItem: Data
 
 
 
@@ -36,10 +36,11 @@ class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
         private val editText: EditText = itemView.findViewById(R.id.editText)
         private val editButton: Button = itemView.findViewById(R.id.editButton)
 
+        private lateinit var currentItem: Data
+
         private var isEditing = false
 
         init {
-
 
                 deleteButton.setOnClickListener {
                 val todoText = checkBox.text.toString()
@@ -62,7 +63,7 @@ class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
                     val updatedText = editText.text.toString()
                     val updatedItem = currentItem.copy(todo = updatedText)
 
-//                    수정 (작업 중)
+//                    수정
                  updateTodoStatus(updatedItem)
                     checkBox.text = updatedText
                     currentItem = updatedItem
@@ -76,7 +77,7 @@ class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
         }
 
 
-
+// 할 일 삭제
         private fun deleteToDo(todo: String) {
             val item = items.find { it.todo == todo } ?: return
             RetrofitClient.apiService.deleteTodo(item.id).enqueue(object : Callback<Void> {
@@ -92,6 +93,7 @@ class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
             })
         }
 
+//        할 일 수정
         private fun updateTodoStatus(item: Data) {
             RetrofitClient.apiService.updateTodo(item.id, item).enqueue(object : Callback<Void> {
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
@@ -106,17 +108,24 @@ class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
             })
         }
 
+//        할 일 완료
         private fun applyCompletionStyle(isDone: Boolean) {
+
+            val originalText = currentItem.todo // 항상 원래 텍스트 기준으로
+
             if (isDone) {
                 // 완료 상태: 텍스트에 취소선 + 회색 처리
                 checkBox.paintFlags = checkBox.paintFlags or android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
                 checkBox.setTextColor(android.graphics.Color.GRAY)
+                checkBox.text = "$originalText (완료)"
             } else {
                 // 미완료 상태: 취소선 제거 + 원래 색상(예: 검정색)
                 checkBox.paintFlags = checkBox.paintFlags and android.graphics.Paint.STRIKE_THRU_TEXT_FLAG.inv()
                 checkBox.setTextColor(android.graphics.Color.BLACK)
+                checkBox.text=originalText
             }
         }
+
 
 
         fun setItem(item: Data) {
@@ -127,6 +136,7 @@ class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
 
             applyCompletionStyle(item.isDone)
 
+//    체크박스 클릭 이벤트
             checkBox.setOnCheckedChangeListener(null) // 기존 리스너 제거
             checkBox.setOnCheckedChangeListener { _, isChecked ->
                 val updatedItem = item.copy(isDone = isChecked)
@@ -140,6 +150,7 @@ class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
         }
     }
 
+    //        할 일 목록 출력
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val itemView = inflater.inflate(R.layout.todo_item, parent, false)

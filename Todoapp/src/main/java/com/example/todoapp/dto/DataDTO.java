@@ -1,5 +1,7 @@
 package com.example.todoapp.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -10,6 +12,9 @@ public class DataDTO {
     private String todo;
 
     @JsonProperty("isDone")
-    private boolean done;
-
+    private Boolean isDone;
 }
+
+
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+//    private LocalDateTime createdAt;
